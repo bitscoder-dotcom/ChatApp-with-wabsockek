@@ -44,7 +44,7 @@ function onConnected() {
 
 
 async function findAndDisplayConnectedUsers() { // method is async because its calling the backend
-    const connectedUserResponse = await fetch('/users');
+    const connectedUserResponse = await fetch('/app/users');
     let connectedUsers = await connectedUserResponse.json();
     connectedUsers = connectedUsers.filter(user => user.nickName !== nickname);
     const connectUserList = document.getElementById('connectedUsers');
@@ -68,7 +68,7 @@ function appendUserElement(user, connectUserList) {
     listItem.id = user.nickName;
 
     const userImage = document.createElement('img');
-    userImage.src = '../img/user_icon.png';
+    userImage.src = '../image/user_icon.png';
     userImage.alt = user.fullName;
 
     const usernameSpan = document.createElement('span');
@@ -84,7 +84,7 @@ function appendUserElement(user, connectUserList) {
 
     listItem.addEventListener('click', userItemClick);
 
-    connectedUsersList.appendChild(listItem);
+    connectUserList.appendChild(listItem);
 }
 
 function userItemClick(event) {

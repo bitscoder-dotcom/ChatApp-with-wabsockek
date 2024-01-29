@@ -29,7 +29,7 @@ public class ChatController {
                 return ResponseEntity.ok(chatMessageService.findChatMessages(senderId, recipientId));
     }
 
-    @MessageMapping("/chat")
+    @MessageMapping("/app/chat")
     public void processMessage(@Payload ChatMessage chatMessage) {
         ChatMessage savedMessage = chatMessageService.saveChat(chatMessage);
         messagingTemplate.convertAndSendToUser(
