@@ -1,0 +1,13 @@
+
+spring:
+  data:
+    mongodb:
+      username: bitscoder
+      password: bitscoder
+      host: localhost
+      port: 27017
+      database: bitscoder-chat-app
+      authentication-database: admin
+
+server:
+  port: 8090
