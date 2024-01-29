@@ -6,6 +6,7 @@ import com.bitscoder.websocket.service.ChatMessageService;
 import com.bitscoder.websocket.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("chatapi/")
 public class ChatController {
 
     private final SimpMessagingTemplate messagingTemplate;
@@ -29,6 +29,7 @@ public class ChatController {
                 return ResponseEntity.ok(chatMessageService.findChatMessages(senderId, recipientId));
     }
 
+    @MessageMapping("/chat")
     public void processMessage(@Payload ChatMessage chatMessage) {
         ChatMessage savedMessage = chatMessageService.saveChat(chatMessage);
         messagingTemplate.convertAndSendToUser(

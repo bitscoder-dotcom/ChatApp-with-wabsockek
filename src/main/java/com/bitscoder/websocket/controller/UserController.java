@@ -15,26 +15,25 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("chatapi/")
 public class UserController {
 
     private final UserService userService;
 
-    @MessageMapping("/user-addUser")
-    @SendTo("user/topic")
+    @MessageMapping("/user.addUser")
+    @SendTo("user/public")
     public User saveUser(@Payload User user) {
         userService.saveUser(user);
         return user;
     }
 
-    @MessageMapping("/user-disconnectUser")
-    @SendTo("user/topic")
+    @MessageMapping("/user.disconnectUser")
+    @SendTo("user/public")
     public User disconnectUser(@Payload User user) {
         userService.disconnectUser(user);
         return user;
     }
 
-    @GetMapping("/get-connected-users")
+    @GetMapping("/users")
     public ResponseEntity<List<User>> getConnectedUsers() {
         return ResponseEntity.ok(userService.findConnectedUsers());
     }
